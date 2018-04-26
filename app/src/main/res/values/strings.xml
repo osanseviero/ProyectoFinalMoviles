@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProyectoFinalMoviles</string>
+    <string name="login">login</string>
+    <string name="signup">Sign Up</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_user_home_screen">UserHomeScreenActivity</string>
 </resources>
