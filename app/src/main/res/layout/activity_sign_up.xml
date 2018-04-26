@@ -18,7 +18,8 @@
         android:layout_marginTop="85dp"
         android:text="@string/signup"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        android:onClick="goToHomeScreen"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -27,5 +28,5 @@
         android:text="Aquí pedir datos como nombre, username, email, contraseña"
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="158dp"
-        android:onClick="goToHomeScreen"/>
+        />
 </RelativeLayout>

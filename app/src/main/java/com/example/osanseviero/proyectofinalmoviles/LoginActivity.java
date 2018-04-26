@@ -10,6 +10,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("DBG", "Abriendo actividad en el login");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
@@ -17,8 +18,8 @@ public class LoginActivity extends AppCompatActivity {
     public void goToHomeScreen(View v) {
         // Here, we need to check what type of user this is and send to the corresponding home
         // screen.
+        Log.d("DBG", "Abriendo actividad");
         Intent intent = new Intent(this, ClientHomeScreenActivity.class);
-        Log.d("TEST", "Going to client home screen");
         startActivity(intent);
     }
 }

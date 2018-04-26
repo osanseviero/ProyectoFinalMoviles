@@ -18,7 +18,8 @@
         android:layout_marginTop="84dp"
         android:text="@string/login"
         tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="81dp" />
+        tools:layout_editor_absoluteY="81dp"
+        android:onClick="goToHomeScreen"/>
 
     <TextView
         android:id="@+id/textView"
@@ -27,5 +28,5 @@
         android:text="Aquí pedir username y contraseña y hacer @string/login"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="16dp"
-        android:onClick="goToHomeScreen"/>
+        />
 </RelativeLayout>
