@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".ClientHomeScreenActivity"></activity>
+        <activity
+            android:name=".ClientHomeScreenActivity"
+            android:label="@string/title_activity_client_home_scren"></activity>
     </application>
 
 </manifest>
