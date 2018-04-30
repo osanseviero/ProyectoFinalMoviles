@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.osanseviero.proyectofinalmoviles.ClientHomeScreenActivity">
 
+    <!--TODO: Add return button to go to previous fragment -->
     <FrameLayout
         android:id="@+id/contentFragment"
         android:layout_width="fill_parent"
