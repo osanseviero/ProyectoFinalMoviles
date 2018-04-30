@@ -24,16 +24,14 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //mTextMessage.setText("Menú");
                     Log.i("NAV", "Navigating to home.");
-                    CategoryListFragment fragment = new CategoryListFragment();
-                    FragmentManager fm = getSupportFragmentManager();
-                    FragmentTransaction transaction = fm.beginTransaction();
-                    transaction.replace(R.id.contentFragment, fragment);
-                    transaction.commit();
+                    CategoryListFragment categoryListfragment = new CategoryListFragment();
+                    FragmentManager clfm = getSupportFragmentManager();
+                    FragmentTransaction categoryListTransaction = clfm.beginTransaction();
+                    categoryListTransaction.replace(R.id.contentFragment, categoryListfragment);
+                    categoryListTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    //mTextMessage.setText("Ordenar");
                     Log.i("NAV", "Navigating to dishes selected to order.");
                     OrderFragment orderFragment = new OrderFragment();
                     FragmentManager ofm = getSupportFragmentManager();
@@ -42,7 +40,12 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
                     orderTransaction.commit();
                     return true;
                 case R.id.navigation_notifications:
-                    //mTextMessage.setText("Ordenados");
+                    Log.i("NAV", "Navigating to list of orders.");
+                    OrderListFragment orderListFragment = new OrderListFragment();
+                    FragmentManager olfm = getSupportFragmentManager();
+                    FragmentTransaction orderListTransaction = olfm.beginTransaction();
+                    orderListTransaction.replace(R.id.contentFragment, orderListFragment);
+                    orderListTransaction.commit();
                     return true;
             }
             return false;

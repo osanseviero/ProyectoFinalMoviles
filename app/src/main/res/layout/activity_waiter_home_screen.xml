@@ -5,17 +5,16 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.ClientHomeScreenActivity">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.WaiterHomeScreenActivity">
 
-    <!--TODO: Add return button to go to previous fragment -->
     <FrameLayout
-        android:id="@+id/contentFragment"
+        android:id="@+id/contentWaiterFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/navigationWaiter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="0dp"
@@ -24,6 +23,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigationclient" />
+        app:menu="@menu/navigationwaiter" />
 
 </android.support.constraint.ConstraintLayout>
