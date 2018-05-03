@@ -8,10 +8,25 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class WaiterHomeScreenActivity extends AppCompatActivity {
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class AdminHomeScreenActivity extends AppCompatActivity {
+    EditText username;
+    EditText name;
+    EditText email;
+    EditText password;
+    EditText kind;
     String token;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -21,14 +36,10 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Log.i("NAV", "Navigating to home.");
-                    WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
-                    FragmentManager wtfm = getSupportFragmentManager();
-                    FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
-                    waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
-                    waiterTablesTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
+                    return true;
+                case R.id.navigation_notifications:
                     return true;
             }
             return false;
@@ -38,21 +49,20 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waiter_home_screen);
+        setContentView(R.layout.activity_admin_home_screen);
 
         // Get token
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
 
-        WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
-        FragmentManager wtfm = getSupportFragmentManager();
-        FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
-        waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
-        waiterTablesTransaction.commit();
+        UsersFragment reportFragment = new UsersFragment();
+        FragmentManager rfm = getSupportFragmentManager();
+        FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
+        reportFragmentTransaction.replace(R.id.contentAdminFragment, reportFragment);
+        reportFragmentTransaction.commit();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationWaiter);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationAdmin);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
 }

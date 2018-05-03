@@ -85,9 +85,6 @@ public class SignUpActivity extends AppCompatActivity {
                 //TODO: Handle error
                 Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
                 Log.e("err", "Message:" + new String(error.networkResponse.data));
-
-
-
             }
         });
 

@@ -25,9 +25,4 @@ public class HomeScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
-
-    public void waiter(View v) {
-        Intent intent = new Intent(this, WaiterHomeScreenActivity.class);
-        startActivity(intent);
-    }
 }

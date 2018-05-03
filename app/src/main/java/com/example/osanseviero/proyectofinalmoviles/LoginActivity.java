@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View v) {
         final Intent clientIntent = new Intent(this, ClientHomeScreenActivity.class);
+        final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
         final Intent waiterIntent = new Intent(this, WaiterHomeScreenActivity.class);
 
         JSONObject js = new JSONObject();
@@ -59,12 +60,16 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("DBG", "kind: " + kind);
 
                             //TODO: Check kind and send to corresponding screen
-                            if(kind == "4") {
+                            if(kind.equals("1")) {
+                                adminIntent.putExtra("token", token);
+                                Log.i("NAV", "Abriendo home screen del admin.");
+                                startActivity(adminIntent);
+                            } else if(kind.equals("4")) {
                                 waiterIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del mesero.");
                                 startActivity(waiterIntent);
                             }
-                            else if(kind == "5") {
+                            else if(kind.equals("5")) {
                                 clientIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del cliente.");
                                 startActivity(clientIntent);
