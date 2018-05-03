@@ -30,6 +30,6 @@
         android:text="@string/login"
         tools:layout_editor_absoluteX="61dp"
         tools:layout_editor_absoluteY="81dp"
-        android:onClick="goToHomeScreen"/>
+        android:onClick="login"/>
 
 </LinearLayout>

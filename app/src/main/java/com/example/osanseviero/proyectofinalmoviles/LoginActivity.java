@@ -12,7 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.osanseviero.proyectofinalmoviles.userRequests;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //TODO: Have a loading bar or something like that
+
         // Create JSON request
         String url = "http://docker-azure.cloudapp.net/user/login";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
@@ -50,21 +51,36 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("DBG", response.toString());
+                        try {
+                            String token = response.getString("token");
+                            String kind = response.getString("kind");
 
-                        //TODO: Check user type and send to corresponding screen
+                            Log.d("DBG", "token: " + token);
+                            Log.d("DBG", "kind: " + kind);
 
-                        Log.i("NAV", "Abriendo home screen del cliente.");
+                            //TODO: Check kind and send to corresponding screen
+                            if(kind == "4") {
+                                waiterIntent.putExtra("token", token);
+                                Log.i("NAV", "Abriendo home screen del mesero.");
+                                startActivity(waiterIntent);
+                            }
+                            else if(kind == "5") {
+                                clientIntent.putExtra("token", token);
+                                Log.i("NAV", "Abriendo home screen del cliente.");
+                                startActivity(clientIntent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                        //TODO: Add token to bundle
-                        startActivity(clientIntent);
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 //TODO: Handle error
-                Log.d("DBG", "Error: " + error.getMessage());
+                Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                Log.e("err", "Message:" + new String(error.networkResponse.data));
             }
         });
 

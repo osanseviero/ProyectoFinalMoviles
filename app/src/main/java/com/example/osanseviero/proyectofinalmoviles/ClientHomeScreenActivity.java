@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class ClientHomeScreenActivity extends AppCompatActivity {
+    String token;
 
-    private TextView mTextMessage;
 
     //TODO: Change icons and names
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -56,14 +56,20 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_home_screen);
-        mTextMessage = (TextView) findViewById(R.id.message);
 
+        // Get token
+        Bundle bundle = getIntent().getExtras();
+        token = bundle.getString("token");
+        Log.d("DBG", "token: " + token);
+
+        // Default fragment
         CategoryListFragment fragment = new CategoryListFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragment, fragment);
         transaction.commit();
 
+        // Initialize navigation bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
