@@ -20,12 +20,12 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UsersFragment extends Fragment {
+public class AdminUserCreationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_users, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_admin_user_creation, container, false);
         final EditText username = rootView.findViewById(R.id.adminCreateUsername);
         final EditText name = rootView.findViewById(R.id.adminCreateName);
         final EditText email = rootView.findViewById(R.id.adminCreateEmail);
@@ -92,5 +92,6 @@ public class UsersFragment extends Fragment {
 
         return rootView;
     }
+
 
 }

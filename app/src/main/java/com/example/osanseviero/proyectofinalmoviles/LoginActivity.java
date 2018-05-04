@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("DBG", "kind: " + kind);
 
                             //TODO: Check kind and send to corresponding screen
-                            if(kind.equals("1")) {
+                            if(kind.equals("1.0")) {
                                 adminIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del admin.");
                                 startActivity(adminIntent);

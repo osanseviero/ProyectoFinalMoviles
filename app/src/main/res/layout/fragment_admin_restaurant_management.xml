@@ -2,24 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.AdminUsersFragment">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.AdminRestaurantManagementFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <Button
-            android:id="@+id/createUser"
+            android:id="@+id/createTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear usuario" />
+            android:text="Crear Mesa" />
 
         <Button
-            android:id="@+id/manageEmployees"
+            android:id="@+id/createDish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Manejar empleados" />
+            android:text="Crear Platillo" />
     </LinearLayout>
+
 </FrameLayout>

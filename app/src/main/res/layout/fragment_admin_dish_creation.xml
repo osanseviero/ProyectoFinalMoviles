@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.ReportFragment">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.AdminDishCreationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Create form to create a new dish -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="En esta vista se debe permitir hacer reportes" />
+        android:text="Form to create a dish" />
 
 </FrameLayout>

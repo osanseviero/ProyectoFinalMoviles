@@ -74,6 +74,7 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    //TODO: Move this methods directly to the fragment code
     public void goToDishList(View v) {
         //TODO: Extract category being selected
         Log.i("NAV", "Navigating to category");

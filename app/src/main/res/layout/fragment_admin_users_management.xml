@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.ReportFragment">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.AdminUsersManagementFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Show all the users here -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="En esta vista se debe permitir hacer reportes" />
+        android:text="Mostrar lista de usuarios y permitir cambios de permisos" />
 
 </FrameLayout>

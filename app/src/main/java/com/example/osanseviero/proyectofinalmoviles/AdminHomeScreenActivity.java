@@ -8,18 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class AdminHomeScreenActivity extends AppCompatActivity {
     EditText username;
@@ -36,10 +25,25 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    ReportFragment reportFragment = new ReportFragment();
+                    FragmentManager rfm = getSupportFragmentManager();
+                    FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
+                    reportFragmentTransaction.replace(R.id.contentAdminFragment, reportFragment);
+                    reportFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
+                    AdminUsersFragment userManagementFragment = new AdminUsersFragment();
+                    FragmentManager aufm = getSupportFragmentManager();
+                    FragmentTransaction userCreationFragmentTransaction = aufm.beginTransaction();
+                    userCreationFragmentTransaction.replace(R.id.contentAdminFragment, userManagementFragment);
+                    userCreationFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_notifications:
+                    AdminRestaurantManagementFragment restaurantManagementFragment = new AdminRestaurantManagementFragment();
+                    FragmentManager armfm = getSupportFragmentManager();
+                    FragmentTransaction restaurantManagementTransaction = armfm.beginTransaction();
+                    restaurantManagementTransaction.replace(R.id.contentAdminFragment, restaurantManagementFragment);
+                    restaurantManagementTransaction.commit();
                     return true;
             }
             return false;
@@ -56,7 +60,7 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
 
-        UsersFragment reportFragment = new UsersFragment();
+        ReportFragment reportFragment = new ReportFragment();
         FragmentManager rfm = getSupportFragmentManager();
         FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
         reportFragmentTransaction.replace(R.id.contentAdminFragment, reportFragment);
