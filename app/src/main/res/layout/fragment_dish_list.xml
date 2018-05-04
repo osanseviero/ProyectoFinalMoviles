@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.DishListFragment">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.ClientDishListFragment">
 
     <!-- TODO: Update fragment layout -->
     <RelativeLayout
@@ -31,13 +31,12 @@
             android:text="Debe ser una lista y los platillos se extienden" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/dishRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Botón de una receta particular"
-            android:onClick="goToDishRecipe"/>
+            android:text="Botón de una receta particular"/>
 
     </RelativeLayout>
 

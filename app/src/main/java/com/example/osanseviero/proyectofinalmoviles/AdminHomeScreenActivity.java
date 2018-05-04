@@ -25,10 +25,10 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    ReportFragment reportFragment = new ReportFragment();
+                    AdminReportFragment adminReportFragment = new AdminReportFragment();
                     FragmentManager rfm = getSupportFragmentManager();
                     FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
-                    reportFragmentTransaction.replace(R.id.contentAdminFragment, reportFragment);
+                    reportFragmentTransaction.replace(R.id.contentAdminFragment, adminReportFragment);
                     reportFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
@@ -60,10 +60,10 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
 
-        ReportFragment reportFragment = new ReportFragment();
+        AdminReportFragment adminReportFragment = new AdminReportFragment();
         FragmentManager rfm = getSupportFragmentManager();
         FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
-        reportFragmentTransaction.replace(R.id.contentAdminFragment, reportFragment);
+        reportFragmentTransaction.replace(R.id.contentAdminFragment, adminReportFragment);
         reportFragmentTransaction.commit();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationAdmin);

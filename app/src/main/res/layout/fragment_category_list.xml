@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.CategoryListFragment">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.ClientCategoryListFragment">
 
     <!-- TODO: Update fragment layout -->
     <RelativeLayout
@@ -30,13 +30,12 @@
             android:text="Aquí se muestran las categorías" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/clientCategoryList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button5"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="77dp"
-            android:onClick="goToDishList"
             android:text="Bebidas" />
 
     </RelativeLayout>
