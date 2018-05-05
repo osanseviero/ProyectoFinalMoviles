@@ -3,9 +3,11 @@ package com.example.osanseviero.proyectofinalmoviles;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,6 +31,21 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.loginPassword);
     }
 
+    public void logincheck(View v) {
+
+        if(TextUtils.isEmpty(username.getText())){
+            Toast.makeText(getApplicationContext(),"Campo de Usuario vacío",Toast.LENGTH_SHORT).show();
+        }
+
+        else if (TextUtils.isEmpty(password.getText())){
+            Toast.makeText(getApplicationContext(),"Campo de Contraseña vacío",Toast.LENGTH_SHORT).show();
+        }
+
+        else{
+            login(v);
+        }
+    }
+
     public void login(View v) {
         final Intent clientIntent = new Intent(this, ClientHomeScreenActivity.class);
         final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
@@ -42,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
         //TODO: Have a loading bar or something like that
 
@@ -58,6 +76,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             Log.d("DBG", "token: " + token);
                             Log.d("DBG", "kind: " + kind);
+
+                            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
 
                             //TODO: Check kind and send to corresponding screen
                             if(kind.equals("1")) {
@@ -84,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //TODO: Handle error
+
+                Toast.makeText(getApplicationContext(), new String(error.networkResponse.data), Toast.LENGTH_SHORT).show();
                 Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
                 Log.e("err", "Message:" + new String(error.networkResponse.data));
             }
