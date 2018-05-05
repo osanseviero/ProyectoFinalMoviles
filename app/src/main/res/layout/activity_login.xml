@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="HOLAOMAR" />
+        android:hint="HELLO" />
 
     <EditText
         android:id="@+id/loginPassword"
