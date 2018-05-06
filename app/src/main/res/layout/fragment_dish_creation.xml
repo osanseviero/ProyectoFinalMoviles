@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.osanseviero.proyectofinalmoviles.AdminDishCreationFragment">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp">
+
+        <LinearLayout
+            android:id="@+id/dishCreation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/dishCreationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Nombre de platillo" />
+
+            <EditText
+                android:id="@+id/dishCreationDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Descripción del platillo" />
+
+            <EditText
+                android:id="@+id/dishCreationDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="8"
+                android:hint="Receta (pasos)"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/dishCreationImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Url de la imagen" />
+
+            <EditText
+                android:id="@+id/dishCreationCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:hint="Costo" />
+
+            <Button
+                android:id="@+id/addIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agregar ingrediente" />
+
+            <Button
+                android:id="@+id/submitDishRequest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crear receta" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

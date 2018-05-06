@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.osanseviero.proyectofinalmoviles.AdminMaterialCreationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/adminMaterialName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre" />
+
+        <EditText
+            android:id="@+id/adminMaterialImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enlace imagen" />
+
+        <EditText
+            android:id="@+id/adminMaterialUnits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unidad (mL o g)" />
+
+        <Button
+            android:id="@+id/submitCreateMaterialRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crear" />
+    </LinearLayout>
+
+</FrameLayout>
