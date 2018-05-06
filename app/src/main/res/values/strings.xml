@@ -16,4 +16,5 @@
     <string name="signUpUsername">Ingrese nombre de usuario</string>
     <string name="title_activity_waiter_home_screen">WaiterHomeScreenActivity</string>
     <string name="title_activity_admin_home_screen">AdminHomeScreenActivity</string>
+    <string name="title_activity_chef_config">ChefConfigActivity</string>
 </resources>

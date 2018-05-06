@@ -1,7 +1,5 @@
 package com.example.osanseviero.proyectofinalmoviles;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +24,7 @@ public class AdminRestaurantManagementFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("NAV", "Navigating to dish creation view");
-                AdminDishCreationFragment fragment = new AdminDishCreationFragment();
+                DishCreationFragment fragment = new DishCreationFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 transaction.replace(R.id.contentAdminFragment, fragment);

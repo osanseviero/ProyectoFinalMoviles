@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         final Intent clientIntent = new Intent(this, ClientHomeScreenActivity.class);
         final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
         final Intent waiterIntent = new Intent(this, WaiterHomeScreenActivity.class);
+        final Intent chefIntent = new Intent(this, ChefHomeScreenActivity.class);
 
         JSONObject js = new JSONObject();
         try {
@@ -84,6 +85,10 @@ public class LoginActivity extends AppCompatActivity {
                                 adminIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del admin.");
                                 startActivity(adminIntent);
+                            } else if(kind.equals("3")) {
+                                chefIntent.putExtra("token", token);
+                                Log.i("NAV", "Abriendo home screen del chef.");
+                                startActivity(chefIntent);
                             } else if(kind.equals("4")) {
                                 waiterIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del mesero.");
