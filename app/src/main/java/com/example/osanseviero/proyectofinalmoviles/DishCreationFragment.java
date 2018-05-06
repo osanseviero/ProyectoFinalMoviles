@@ -34,7 +34,9 @@ public class DishCreationFragment extends Fragment {
         final EditText name = rootView.findViewById(R.id.dishCreationName);
         final EditText description = rootView.findViewById(R.id.dishCreationDescription);
         final EditText detail = rootView.findViewById(R.id.dishCreationDetail);
+        final EditText src = rootView.findViewById(R.id.dishCreationSource);
         final EditText image = rootView.findViewById(R.id.dishCreationImage);
+        final EditText time = rootView.findViewById(R.id.dishCreationTime);
         final EditText cost = rootView.findViewById(R.id.dishCreationCost);
         Button addIngredient = rootView.findViewById(R.id.addIngredient);
         final Button submitForm = rootView.findViewById(R.id.submitDishRequest);
@@ -68,12 +70,19 @@ public class DishCreationFragment extends Fragment {
                 JSONObject js = new JSONObject();
                 try {
                     // Build JSON from text fields
-                    js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
+                    try {
+                        js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
+                    } catch(ClassCastException e) {
+                        js.put("token", ((ChefHomeScreenActivity) v.getContext()).token );
+                    }
                     js.put("name", name.getText().toString());
                     js.put("desc", description.getText().toString());
                     js.put("detail", detail.getText().toString());
+                    js.put("detail", detail.getText().toString());
+                    js.put("src", src.getText().toString());
                     js.put("img_url", image.getText().toString());
-                    js.put("cost",  Integer.parseInt(cost  .getText().toString()));
+                    js.put("time",  Integer.parseInt(time.getText().toString()));
+                    js.put("cost",  Integer.parseInt(cost.getText().toString()));
 
                     JSONArray ingredientJsons = new JSONArray();
                     for(int i=0; i<ingredients.size(); i++) {

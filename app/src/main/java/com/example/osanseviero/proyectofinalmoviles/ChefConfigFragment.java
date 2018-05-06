@@ -19,11 +19,23 @@ public class ChefConfigFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_chef_config, container, false);
         Button createDishButton = rootView.findViewById(R.id.chefCreateDish);
+        Button createMaterialButton = rootView.findViewById(R.id.chefCreateMaterial);
 
         createDishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DishCreationFragment fragment = new DishCreationFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.contentChefFragment, fragment);
+                transaction.commit();
+            }
+        });
+
+        createMaterialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialCreationFragment fragment = new MaterialCreationFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 transaction.replace(R.id.contentChefFragment, fragment);

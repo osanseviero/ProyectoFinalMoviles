@@ -40,6 +40,14 @@
                 android:inputType="textMultiLine" />
 
             <EditText
+                android:id="@+id/dishCreationSource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Fuente"
+                android:inputType="text" />
+
+            <EditText
                 android:id="@+id/dishCreationImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,12 +56,22 @@
                 android:hint="Url de la imagen" />
 
             <EditText
+                android:id="@+id/dishCreationTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Tiempo de preparación (min)"
+                android:inputType="number"
+                android:text="0" />
+
+            <EditText
                 android:id="@+id/dishCreationCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Costo"
                 android:inputType="numberDecimal"
-                android:hint="Costo" />
+                android:text="0" />
 
             <Button
                 android:id="@+id/addIngredient"

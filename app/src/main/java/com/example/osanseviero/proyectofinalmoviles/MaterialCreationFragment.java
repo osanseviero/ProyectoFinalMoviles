@@ -1,7 +1,5 @@
 package com.example.osanseviero.proyectofinalmoviles;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,11 +19,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class AdminMaterialCreationFragment extends Fragment {
+public class MaterialCreationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_admin_material_creation, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_material_creation, container, false);
 
         final EditText name = rootView.findViewById(R.id.adminMaterialName);
         final EditText image = rootView.findViewById(R.id.adminMaterialImage);
@@ -41,7 +39,12 @@ public class AdminMaterialCreationFragment extends Fragment {
                     js.put("name", name.getText().toString());
                     js.put("img_url", image.getText().toString());
                     js.put("units", units.getText().toString());
-                    js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
+                    try {
+                        js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
+                    } catch(ClassCastException e) {
+                        js.put("token", ((ChefHomeScreenActivity) v.getContext()).token );
+                    }
+
                     Log.d("DBG", js.toString());
 
                 } catch (JSONException e) {

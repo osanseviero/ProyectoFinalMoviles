@@ -37,7 +37,7 @@ public class AdminRestaurantManagementFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("NAV", "Navigating to material creation view");
-                AdminMaterialCreationFragment fragment = new AdminMaterialCreationFragment();
+                MaterialCreationFragment fragment = new MaterialCreationFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 transaction.replace(R.id.contentAdminFragment, fragment);
