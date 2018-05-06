@@ -38,6 +38,7 @@ public class DishCreationFragment extends Fragment {
         final EditText image = rootView.findViewById(R.id.dishCreationImage);
         final EditText time = rootView.findViewById(R.id.dishCreationTime);
         final EditText cost = rootView.findViewById(R.id.dishCreationCost);
+        final EditText category = rootView.findViewById(R.id.dishCreationCategory);
         Button addIngredient = rootView.findViewById(R.id.addIngredient);
         final Button submitForm = rootView.findViewById(R.id.submitDishRequest);
 
@@ -81,6 +82,7 @@ public class DishCreationFragment extends Fragment {
                     js.put("detail", detail.getText().toString());
                     js.put("src", src.getText().toString());
                     js.put("img_url", image.getText().toString());
+                    js.put("category", category.getText().toString());
                     js.put("time",  Integer.parseInt(time.getText().toString()));
                     js.put("cost",  Integer.parseInt(cost.getText().toString()));
 

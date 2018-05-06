@@ -24,6 +24,14 @@
                 android:hint="Nombre de platillo" />
 
             <EditText
+                android:id="@+id/dishCreationCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Categoría (bebida, postre, entrada, etc)" />
+
+            <EditText
                 android:id="@+id/dishCreationDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
