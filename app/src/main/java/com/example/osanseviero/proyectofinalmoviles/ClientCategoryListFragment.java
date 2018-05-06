@@ -89,22 +89,6 @@ public class ClientCategoryListFragment extends Fragment {
 
         Volley.newRequestQueue(rootView.getContext()).add(request);
 
-        /*
-        Button categoryListButton = rootView.findViewById(R.id.clientCategoryList);
-
-        categoryListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: Extract category being selected
-                Log.i("NAV", "Navigating to category");
-                ClientDishListFragment fragment = new ClientDishListFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction transaction = fm.beginTransaction();
-                transaction.replace(R.id.contentFragment, fragment);
-                transaction.commit();
-            }
-        });*/
-
         // Inflate the layout for this fragment
         return rootView;
     }
