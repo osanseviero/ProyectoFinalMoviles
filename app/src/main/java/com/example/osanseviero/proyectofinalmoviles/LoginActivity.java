@@ -61,9 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        //TODO: Have a loading bar or something like that
-
         // Create JSON request
         String url = "http://docker-azure.cloudapp.net/user/login";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
