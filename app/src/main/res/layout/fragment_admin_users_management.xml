@@ -5,9 +5,12 @@
     tools:context="com.example.osanseviero.proyectofinalmoviles.AdminUsersManagementFragment">
 
     <!-- TODO: Show all the users here -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/CustomerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Mostrar lista de usuarios y permitir cambios de permisos" />
+        android:orientation="vertical"
+        >
+    </LinearLayout>
 
 </FrameLayout>
