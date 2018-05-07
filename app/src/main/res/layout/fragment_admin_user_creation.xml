@@ -45,13 +45,12 @@
             android:hint="Contraseña" />
 
         <!--TODO: Change this to a string dropdown or radio button -->
-        <EditText
-            android:id="@+id/adminCreateKind"
+
+        <Spinner
+            android:id="@+id/spinnerKind"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="Tipo de usuario" />
+            android:layout_height="34dp"
+            android:prompt="@string/spinner_title" />
 
         <Button
             android:id="@+id/adminCreateUserButton"

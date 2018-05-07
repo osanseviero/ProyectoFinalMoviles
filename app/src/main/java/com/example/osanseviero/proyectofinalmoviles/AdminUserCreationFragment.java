@@ -8,8 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,7 +24,12 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdminUserCreationFragment extends Fragment {
+    int kindval;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,8 +39,31 @@ public class AdminUserCreationFragment extends Fragment {
         final EditText name = rootView.findViewById(R.id.adminCreateName);
         final EditText email = rootView.findViewById(R.id.adminCreateEmail);
         final EditText password = rootView.findViewById(R.id.adminCreatePassword);
-        final EditText kind = rootView.findViewById(R.id.adminCreateKind);
+
         Button b = rootView.findViewById(R.id.adminCreateUserButton);
+
+        String [] values = {"Administrador","Dueño","Cocinero","Mesero","Cliente",};
+        Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnerKind);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int pos, long id)
+            {
+
+                kindval = pos + 1;
+                Log.d("DBG", "Kind: " + kindval);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // vacío
+            }
+        });
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +79,10 @@ public class AdminUserCreationFragment extends Fragment {
                     js.put("password", password.getText().toString());
 
                     //TODO: Validar que sea de 1 a 5
-                    js.put("kind", Integer.parseInt(kind.getText().toString()));
+                    js.put("kind", kindval);
                     js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
                     Log.d("DBG", js.toString());
+                    Toast.makeText(getActivity().getApplicationContext(), "Usuario '" + username.getText().toString() + "' creado exitosamente", Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -91,6 +124,15 @@ public class AdminUserCreationFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+
     }
 
 
