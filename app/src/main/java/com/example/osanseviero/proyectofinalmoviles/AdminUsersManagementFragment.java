@@ -91,7 +91,7 @@ public class AdminUsersManagementFragment extends Fragment {
                                         Log.d("DBG", jsDel.toString());
 
                                         JsonObjectRequest delete = new JsonObjectRequest(
-                                                Request.Method.DELETE,
+                                                Request.Method.POST,
                                                 urlDelete,
                                                 jsDel,
                                                 new Response.Listener<JSONObject>() {
