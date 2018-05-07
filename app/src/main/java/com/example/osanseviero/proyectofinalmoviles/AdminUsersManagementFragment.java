@@ -29,7 +29,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class AdminUsersManagementFragment extends Fragment {
-    ArrayList<String> userId = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,8 +67,6 @@ public class AdminUsersManagementFragment extends Fragment {
                             try {
                                 String name = response.getJSONObject(i).getString("username");
 
-                                userId.add(response.getJSONObject(i).getString("id"));
-
                                 Button b = new Button(getActivity());
                                 b.setText("Eliminar Usuario");
                                 b.setTag(response.getJSONObject(i).getString("id"));
@@ -86,22 +83,26 @@ public class AdminUsersManagementFragment extends Fragment {
                                         JSONObject jsDel = new JSONObject();
                                         try {
                                             jsDel.put("token", ((AdminHomeScreenActivity) rootView.getContext()).token );
-                                            jsDel.put("user-id", b.getTag());
+                                            jsDel.put("user-id", v.getTag());
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
 
                                         Log.d("DBG", jsDel.toString());
 
-                                        MyJsonArrayRequest delete = new MyJsonArrayRequest(
+                                        JsonObjectRequest delete = new JsonObjectRequest(
                                                 Request.Method.DELETE,
                                                 urlDelete,
                                                 jsDel,
-                                                new Response.Listener<JSONArray>() {
+                                                new Response.Listener<JSONObject>() {
                                                     @Override
-                                                    public void onResponse(JSONArray response) {
-                                                        Log.d("DBG", response.toString());
-
+                                                    public void onResponse(JSONObject response) {
+                                                        try {
+                                                            String message = response.getString("message");
+                                                            Log.d("DBG", "Message: " + message);
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
                                                     }
                                                 },
                                                 new Response.ErrorListener() {
