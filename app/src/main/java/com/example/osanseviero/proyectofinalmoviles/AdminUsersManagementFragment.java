@@ -38,7 +38,7 @@ public class AdminUsersManagementFragment extends Fragment {
 
         String urlFirstQuery = "http://docker-azure.cloudapp.net/user/query/3";
         String urlSecondQuery = "http://docker-azure.cloudapp.net/user/query/4";
-        String urlThirdQuery = "http://docker-azure.cloudapp.net/user/query/5";
+        String urlThirdQuery = "http://docker-azure.cloudapp.net/user/query";
         final String urlDelete = "http://docker-azure.cloudapp.net/user/delete";
 
         JSONObject js = new JSONObject();

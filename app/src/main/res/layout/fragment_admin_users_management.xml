@@ -5,12 +5,17 @@
     tools:context="com.example.osanseviero.proyectofinalmoviles.AdminUsersManagementFragment">
 
     <!-- TODO: Show all the users here -->
-    <LinearLayout
-        android:id="@+id/CustomerList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-    </LinearLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp">
+        <LinearLayout
+            android:id="@+id/CustomerList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
