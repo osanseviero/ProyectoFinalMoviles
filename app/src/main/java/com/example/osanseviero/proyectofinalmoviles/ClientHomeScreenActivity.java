@@ -1,5 +1,6 @@
 package com.example.osanseviero.proyectofinalmoviles;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,9 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 public class ClientHomeScreenActivity extends AppCompatActivity {
     String token;
+    final DBAdaptor adaptor = new DBAdaptor(this);
 
     //TODO: Change icons and names
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -69,5 +87,76 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
         // Initialize navigation bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    public void logout(View v)
+    {
+        JSONObject js = new JSONObject();
+        try {
+            js.put("token", token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("DBG", js.toString());
+
+        String url = "http://docker-azure.cloudapp.net/user/logout";
+
+        final String requestBody = js.toString();
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.d("DBG", "Abriendo home screen.");
+                        Intent intent = new Intent(ClientHomeScreenActivity.this , HomeScreenActivity.class);
+
+                        adaptor.open();
+                        adaptor.dropDatabase();
+                        adaptor.close();
+                        Toast.makeText(getApplicationContext(), "Salió de su cuenta exitosamente", Toast.LENGTH_SHORT).show();
+
+                        startActivity(intent);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        e.printStackTrace();
+                        Log.e("ERROR", "Error code: " + e.networkResponse.statusCode);
+                        Log.e("err", "Message:" + new String(e.networkResponse.data));
+
+                    }
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                String responseString = "";
+                if (response != null) {
+                    responseString = String.valueOf(response.statusCode);
+                    // can get more details such as response.headers
+                }
+                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+            }
+        };
+
+        Volley.newRequestQueue(this).add(request);
     }
 }
