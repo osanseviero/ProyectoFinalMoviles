@@ -70,7 +70,7 @@
                 android:ems="10"
                 android:hint="Tiempo de preparación (min)"
                 android:inputType="number"
-                android:text="0" />
+                />
 
             <EditText
                 android:id="@+id/dishCreationCost"
@@ -79,7 +79,16 @@
                 android:ems="10"
                 android:hint="Costo"
                 android:inputType="numberDecimal"
-                android:text="0" />
+                />
+
+            <EditText
+                android:id="@+id/dishCreationCalories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Calorias"
+                android:inputType="numberDecimal"
+                />
 
             <Button
                 android:id="@+id/addIngredient"

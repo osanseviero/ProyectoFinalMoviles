@@ -19,7 +19,7 @@ public class DBAdaptor {
 
     static final String DB_NAME = "CRM";
     static final String DB_TABLE = "tokens";
-    static final int DB_VERSION = 7;
+    static final int DB_VERSION = 10;
 
     static final String CREAR_BD =
             "CREATE TABLE " + DB_TABLE +
@@ -91,5 +91,10 @@ public class DBAdaptor {
         return db.query(DB_TABLE,
                 new String[] {KEY_TOKEN},
                 null, null, null, null, null);
+    }
+
+    public void dropDatabase() {
+        db.execSQL("DROP TABLE IF EXISTS tokens");
+        db.execSQL(CREAR_BD);
     }
 }

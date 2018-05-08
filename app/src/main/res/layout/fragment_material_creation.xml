@@ -27,6 +27,22 @@
             android:layout_height="wrap_content"
             android:hint="Unidad (mL o g)" />
 
+        <EditText
+            android:id="@+id/adminMaterialCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Calorías por unidad" />
+
+        <EditText
+            android:id="@+id/adminMaterialDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:hint="Descripción del material"/>
+
         <Button
             android:id="@+id/submitCreateMaterialRequest"
             android:layout_width="match_parent"

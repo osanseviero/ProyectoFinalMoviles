@@ -28,6 +28,8 @@ public class MaterialCreationFragment extends Fragment {
         final EditText name = rootView.findViewById(R.id.adminMaterialName);
         final EditText image = rootView.findViewById(R.id.adminMaterialImage);
         final EditText units = rootView.findViewById(R.id.adminMaterialUnits);
+        final EditText calories = rootView.findViewById(R.id.adminMaterialCalories);
+        final EditText description = rootView.findViewById(R.id.adminMaterialDescription);
         Button b = rootView.findViewById(R.id.submitCreateMaterialRequest);
 
         b.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +41,8 @@ public class MaterialCreationFragment extends Fragment {
                     js.put("name", name.getText().toString());
                     js.put("img_url", image.getText().toString());
                     js.put("units", units.getText().toString());
+                    js.put("calories", Integer.parseInt(calories.getText().toString()));
+                    js.put("units", description.getText().toString());
                     try {
                         js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
                     } catch(ClassCastException e) {

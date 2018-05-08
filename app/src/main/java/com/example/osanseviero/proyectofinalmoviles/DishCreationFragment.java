@@ -39,6 +39,7 @@ public class DishCreationFragment extends Fragment {
         final EditText time = rootView.findViewById(R.id.dishCreationTime);
         final EditText cost = rootView.findViewById(R.id.dishCreationCost);
         final EditText category = rootView.findViewById(R.id.dishCreationCategory);
+        final EditText calories = rootView.findViewById(R.id.dishCreationCalories);
         Button addIngredient = rootView.findViewById(R.id.addIngredient);
         final Button submitForm = rootView.findViewById(R.id.submitDishRequest);
 
@@ -85,6 +86,7 @@ public class DishCreationFragment extends Fragment {
                     js.put("category", category.getText().toString());
                     js.put("time",  Integer.parseInt(time.getText().toString()));
                     js.put("cost",  Integer.parseInt(cost.getText().toString()));
+                    js.put("calories",  Integer.parseInt(calories.getText().toString()));
 
                     JSONArray ingredientJsons = new JSONArray();
                     for(int i=0; i<ingredients.size(); i++) {
