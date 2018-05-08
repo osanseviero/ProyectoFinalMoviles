@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,15 +30,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ClientDishFragment extends Fragment {
-
+    String dishId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.fragment_dish, container, false);
+        final Button order =  rootView.findViewById(R.id.clientOrderDish);
 
         // Extract dishId
-        String dishId = "";
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             dishId = bundle.getString("dishId");
@@ -107,8 +109,87 @@ public class ClientDishFragment extends Fragment {
                     }
                 }
         );
-
         Volley.newRequestQueue(rootView.getContext()).add(request);
+
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mytaburl = "http://docker-azure.cloudapp.net/tab/mytabs";
+
+                JSONObject js = new JSONObject();
+                try {
+                    js.put("token", ((ClientHomeScreenActivity) rootView.getContext()).token );
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                MyJsonArrayRequest tabRequest = new MyJsonArrayRequest(
+                        Request.Method.POST,
+                        mytaburl,
+                        js,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    Log.d("DBG", "TAB DEL USER");
+                                    Log.d("DBG", response.toString());
+                                    JSONObject js = response.getJSONObject(0);
+                                    String tabId = js.getString("id");
+
+                                    String mytaburl = "http://docker-azure.cloudapp.net/tab/" + tabId + "/addorder";
+
+                                    JSONObject jsOrder = new JSONObject();
+                                    try {
+                                        jsOrder.put("token", ((ClientHomeScreenActivity) rootView.getContext()).token );
+                                        jsOrder.put("recipe-id", dishId);
+
+                                        Log.d("DBG", js.toString());
+
+                                        JsonObjectRequest tabRequest = new JsonObjectRequest(
+                                            Request.Method.POST,
+                                            mytaburl,
+                                            jsOrder,
+                                            new Response.Listener<JSONObject>() {
+                                                @Override
+                                                public void onResponse(JSONObject response) {
+                                                    Toast.makeText(getContext(), "Orden realizada", Toast.LENGTH_SHORT).show();
+                                                    Log.d("DBG", response.toString());
+                                                }
+                                            },
+                                            new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                                                    Log.e("err", "Message:" + new String(error.networkResponse.data));
+                                                }
+                                            }
+                                        );
+                                        Volley.newRequestQueue(rootView.getContext()).add(tabRequest);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                } catch( JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                                Log.e("err", "Message:" + new String(error.networkResponse.data));
+                            }
+                        }
+                );
+                Volley.newRequestQueue(rootView.getContext()).add(tabRequest);
+            }
+        });
+
+
+
+
 
         // Inflate the layout for this fragment
         return rootView;

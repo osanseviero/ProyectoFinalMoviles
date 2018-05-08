@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,8 +55,8 @@ public class WaiterAsssignUserFragment extends Fragment {
                         js.put("token", ((WaiterHomeScreenActivity) getContext()).token );
                         js.put("table", table);
 
-                        ArrayList<String> customers = new ArrayList<String>();
-                        customers.add(tableCustomer.getText().toString());
+                        JSONArray customers = new JSONArray();
+                        customers.put(tableCustomer.getText().toString());
 
                         js.put("customers", customers);
                         Log.d("DBG", js.toString());

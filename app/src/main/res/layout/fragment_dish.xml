@@ -21,6 +21,13 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="32sp"/>
+
+        <!--TODO: Ask for confirmation -->
+        <Button
+            android:id="@+id/clientOrderDish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ordenar" />
     </LinearLayout>
 
 
