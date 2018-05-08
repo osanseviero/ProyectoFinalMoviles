@@ -34,4 +34,12 @@ public class ChefHomeScreenActivity extends AppCompatActivity {
         reportFragmentTransaction.replace(R.id.contentChefFragment, chefConfigFragment);
         reportFragmentTransaction.commit();
     }
+
+    public void chefHome(View v) {
+        ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
+        FragmentManager cofm = getSupportFragmentManager();
+        FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
+        reportFragmentTransaction.replace(R.id.contentChefFragment, chefOrdersFragment);
+        reportFragmentTransaction.commit();
+    }
 }
