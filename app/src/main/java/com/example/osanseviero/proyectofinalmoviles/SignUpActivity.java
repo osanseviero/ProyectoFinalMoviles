@@ -24,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText name;
     EditText email;
     EditText password;
+    final DBAdaptor adaptor = new DBAdaptor(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,10 @@ public class SignUpActivity extends AppCompatActivity {
                         try {
                             String token = response.getString("token");
                             String kind = response.getString("kind");
+
+                            adaptor.open();
+                            adaptor.insertToken(token);
+                            adaptor.close();
 
                             Log.d("DBG", "token: " + token);
                             Log.d("DBG", "kind: " + kind);

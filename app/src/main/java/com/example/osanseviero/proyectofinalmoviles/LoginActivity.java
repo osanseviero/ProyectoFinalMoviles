@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
         final Intent waiterIntent = new Intent(this, WaiterHomeScreenActivity.class);
         final Intent chefIntent = new Intent(this, ChefHomeScreenActivity.class);
-
+        final  DBAdaptor adaptor = new DBAdaptor(this);
         JSONObject js = new JSONObject();
         try {
             // Build JSON from text fields
@@ -76,6 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("DBG", "kind: " + kind);
 
                             Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
+
+                            adaptor.open();
+                            adaptor.insertToken(token);
+                            adaptor.close();
 
                             //TODO: Check kind and send to corresponding screen
                             if(kind.equals("1")) {
