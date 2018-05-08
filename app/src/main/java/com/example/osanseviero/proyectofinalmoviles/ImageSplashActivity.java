@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ImageSplashActivity extends AppCompatActivity {
-    private long waitTime = 5000;
+    private long waitTime = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class ImageSplashActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             public void run() {
                 finish();
-                Intent mainIntent = new Intent().setClass(ImageSplashActivity.this, VideoSplashActivity.class);
+                Intent mainIntent = new Intent().setClass(ImageSplashActivity.this, HomeScreenActivity.class);
                 startActivity(mainIntent);
             }
         };

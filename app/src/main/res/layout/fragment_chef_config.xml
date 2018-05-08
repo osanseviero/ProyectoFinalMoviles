@@ -23,10 +23,16 @@
             android:text="Creat material" />
 
         <Button
+            android:id="@+id/chefRecibir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recibir Materiales" />
+
+        <Button
             android:id="@+id/chefInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Inventario" />
+            android:text="Ver Inventario" />
     </LinearLayout>
 
 </FrameLayout>
