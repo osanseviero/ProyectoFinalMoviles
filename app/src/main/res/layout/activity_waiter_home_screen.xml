@@ -7,18 +7,25 @@
     android:layout_height="match_parent"
     tools:context="com.example.osanseviero.proyectofinalmoviles.WaiterHomeScreenActivity">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:onClick="logout"/>
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/contentWaiterFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            />
+
+        <FrameLayout
+            android:id="@+id/contentWaiterFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationWaiter"
@@ -31,5 +38,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navigationwaiter" />
+
 
 </android.support.constraint.ConstraintLayout>
