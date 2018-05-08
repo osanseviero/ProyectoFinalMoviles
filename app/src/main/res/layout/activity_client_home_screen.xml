@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.osanseviero.proyectofinalmoviles.ClientHomeScreenActivity">
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        />
+
     <!--TODO: Add return button to go to previous fragment -->
     <FrameLayout
         android:id="@+id/contentFragment"

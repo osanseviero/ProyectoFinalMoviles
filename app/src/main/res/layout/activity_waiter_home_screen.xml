@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.osanseviero.proyectofinalmoviles.WaiterHomeScreenActivity">
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        />
+
     <FrameLayout
         android:id="@+id/contentWaiterFragment"
         android:layout_width="fill_parent"
