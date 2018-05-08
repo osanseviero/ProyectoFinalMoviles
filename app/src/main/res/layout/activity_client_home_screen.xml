@@ -7,19 +7,26 @@
     android:layout_height="match_parent"
     tools:context="com.example.osanseviero.proyectofinalmoviles.ClientHomeScreenActivity">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:onClick="logout"/>
+        android:orientation="vertical">
 
-    <!--TODO: Add return button to go to previous fragment -->
-    <FrameLayout
-        android:id="@+id/contentFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:onClick="logout"/>
+
+        <!--TODO: Add return button to go to previous fragment -->
+        <FrameLayout
+            android:id="@+id/contentFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

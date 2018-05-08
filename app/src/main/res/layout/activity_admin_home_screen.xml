@@ -7,18 +7,24 @@
     android:layout_height="match_parent"
     tools:context="com.example.osanseviero.proyectofinalmoviles.AdminHomeScreenActivity">
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:onClick="logout"/>
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/contentAdminFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:onClick="logout"/>
+
+        <FrameLayout
+            android:id="@+id/contentAdminFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationAdmin"
