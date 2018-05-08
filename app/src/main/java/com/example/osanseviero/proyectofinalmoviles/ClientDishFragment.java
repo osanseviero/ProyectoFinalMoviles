@@ -1,19 +1,118 @@
 package com.example.osanseviero.proyectofinalmoviles;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ClientDishFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final View rootView = inflater.inflate(R.layout.fragment_dish, container, false);
+
+        // Extract dishId
+        String dishId = "";
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            dishId = bundle.getString("dishId");
+        }
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("token", ((ClientHomeScreenActivity) rootView.getContext()).token );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url = "http://docker-azure.cloudapp.net/recipe/by-id/" + dishId;
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                js,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("DBG", response.toString());
+                            Log.d("DBG", "Inside recipe");
+
+                            String imgurl = response.getString("img_url");
+                            String name = response.getString("name");
+
+                            ImageRequest requestImage = new ImageRequest(
+                                    imgurl,
+                                    new Response.Listener<Bitmap>() {
+                                        @Override
+                                        public void onResponse(Bitmap response) {
+                                            Log.v("DBG", "Got image");
+                                            ImageView iv =  rootView.findViewById(R.id.dishImage);
+                                            iv.setImageBitmap(response);
+                                        }
+                                    },
+                                    0,
+                                    0,
+                                    ImageView.ScaleType.CENTER_CROP,
+                                    Bitmap.Config.RGB_565,
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.v("ERROR", "Volley error image:\n" + error.toString());
+                                            error.printStackTrace();
+                                        }
+                                    }
+
+                            );
+                            Volley.newRequestQueue(rootView.getContext()).add(requestImage);
+                            Log.v("DBG", "what");
+                            TextView nameView = rootView.findViewById(R.id.textView3);
+                            nameView.setText(name);
+
+                        } catch(JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                        Log.e("err", "Message:" + new String(error.networkResponse.data));
+                    }
+                }
+        );
+
+        Volley.newRequestQueue(rootView.getContext()).add(request);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dish, container, false);
+        return rootView;
+
+
     }
 }
