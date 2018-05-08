@@ -24,6 +24,11 @@ public class HomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
 
         final Intent clientIntent = new Intent(this, ClientHomeScreenActivity.class);
         final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
