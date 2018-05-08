@@ -11,13 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeScreenActivity">
+        <activity android:name=".ImageSplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HomeScreenActivity"
+            android:exported="true" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
@@ -30,6 +33,7 @@
             android:name=".AdminHomeScreenActivity"
             android:label="@string/title_activity_admin_home_screen" />
         <activity android:name=".ChefHomeScreenActivity" />
+        <activity android:name=".VideoSplashActivity"></activity>
     </application>
 
 </manifest>
