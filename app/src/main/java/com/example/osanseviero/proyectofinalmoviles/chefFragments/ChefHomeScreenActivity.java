@@ -1,11 +1,18 @@
 package com.example.osanseviero.proyectofinalmoviles.chefFragments;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,6 +38,32 @@ public class ChefHomeScreenActivity extends AppCompatActivity {
     public String token;
     final DBAdaptor adaptor = new DBAdaptor(this);
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
+    private NavigationView.OnNavigationItemSelectedListener drawer_listener = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.nav_logout:
+                    logout(null);
+                    drawerLayout.closeDrawers();
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +73,18 @@ public class ChefHomeScreenActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
+
+        // Toolbar stuff
+        Toolbar toolbar = findViewById(R.id.toolbar_chef);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+
+        // Drawer stuff
+        drawerLayout = findViewById(R.id.drawer_container_chef);
+        navigationView = findViewById(R.id.nav_view_chef);
+        navigationView.setNavigationItemSelectedListener(drawer_listener);
 
         ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
         FragmentManager cofm = getSupportFragmentManager();
