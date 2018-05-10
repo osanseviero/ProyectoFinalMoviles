@@ -2,6 +2,8 @@ package com.example.osanseviero.proyectofinalmoviles.chefFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,11 +73,20 @@ public class ChefInventoryListFragment extends Fragment {
                                     public void onClick(View v) {
 
 
-                                        Toast.makeText(getActivity().getApplicationContext(), "Material Eliminado", Toast.LENGTH_SHORT).show();
+
                                         JSONObject jsDel = new JSONObject();
                                         try {
                                             jsDel.put("token", ((ChefHomeScreenActivity) rootView.getContext()).token );
                                             jsDel.put("inventory-id", v.getTag());
+
+                                            Toast.makeText(getActivity().getApplicationContext(), "Material Eliminado", Toast.LENGTH_SHORT).show();
+
+                                            ChefInventoryListFragment chefInventoryListFragment = new ChefInventoryListFragment();
+                                            FragmentManager cofm = getFragmentManager();
+                                            FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
+                                            reportFragmentTransaction.replace(R.id.contentChefFragment, chefInventoryListFragment);
+                                            reportFragmentTransaction.commit();
+
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
