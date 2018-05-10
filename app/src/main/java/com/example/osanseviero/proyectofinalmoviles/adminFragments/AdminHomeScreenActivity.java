@@ -121,7 +121,7 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+        //actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         // Drawer stuff
         drawerLayout = findViewById(R.id.drawer_container);

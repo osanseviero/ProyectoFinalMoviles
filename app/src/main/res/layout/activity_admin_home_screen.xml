@@ -16,15 +16,16 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" tools:ignore="ExtraText">
 
             <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar" app:title="Admin"/>
-
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                    app:title="Admin"
+                    app:navigationIcon="@drawable/ic_menu_black_24dp"
+            />
             <FrameLayout
                     android:id="@+id/contentAdminFragment"
                     android:layout_width="fill_parent"
@@ -33,10 +34,10 @@
         </LinearLayout>
 
         <android.support.design.widget.BottomNavigationView
+                android:background="@color/colorAccent"
                 android:id="@+id/navigationAdmin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/windowBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
