@@ -25,7 +25,7 @@
                     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                     app:title="Admin"
                     app:navigationIcon="@drawable/ic_menu_black_24dp"
-            />
+                    android:elevation="2dp"/>
             <FrameLayout
                     android:id="@+id/contentAdminFragment"
                     android:layout_width="fill_parent"

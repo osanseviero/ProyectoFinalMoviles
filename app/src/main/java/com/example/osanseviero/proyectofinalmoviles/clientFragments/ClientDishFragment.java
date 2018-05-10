@@ -167,6 +167,7 @@ public class ClientDishFragment extends Fragment {
 
 
                                 } catch( JSONException e) {
+                                    Toast.makeText(rootView.getContext(), "No hay cuentas abiertas!", Toast.LENGTH_SHORT).show();
                                     e.printStackTrace();
                                 }
                             }
