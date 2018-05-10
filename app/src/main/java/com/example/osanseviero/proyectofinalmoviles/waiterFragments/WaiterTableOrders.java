@@ -85,7 +85,7 @@ public class WaiterTableOrders extends Fragment {
                                         Toast.makeText(getActivity().getApplicationContext(), "Orden despachada", Toast.LENGTH_SHORT).show();
                                         JSONObject jsDel = new JSONObject();
                                         try {
-                                            jsDel.put("token", ((ChefHomeScreenActivity) rootView.getContext()).token );
+                                            jsDel.put("token", ((WaiterHomeScreenActivity) rootView.getContext()).token );
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
