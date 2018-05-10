@@ -97,6 +97,22 @@ public class WaiterTablesFragment extends Fragment {
                                                     });
                                                 } else {
                                                     b.setBackgroundColor(Color.RED);
+
+                                                    b.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            WaiterTableOrders waiterTableOrders = new WaiterTableOrders();
+                                                            FragmentManager wto = getFragmentManager();
+                                                            FragmentTransaction reportFragmentTransaction = wto.beginTransaction();
+                                                            reportFragmentTransaction.replace(R.id.contentWaiterFragment, waiterTableOrders);
+
+                                                            // Specify category name
+                                                            Bundle args = new Bundle();
+                                                            args.putInt("table", Integer.parseInt(v.getTag().toString()));
+                                                            waiterTableOrders.setArguments(args);
+                                                            reportFragmentTransaction.commit();
+                                                        }
+                                                    });
                                                 }
                                                 linearLayout.addView(b);
                                             }
