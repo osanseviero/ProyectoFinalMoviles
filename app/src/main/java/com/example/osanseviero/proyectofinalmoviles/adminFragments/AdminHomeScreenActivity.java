@@ -41,8 +41,6 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
     EditText kind;
     public String token;
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
 
     final DBAdaptor adaptor = new DBAdaptor(this);
 
@@ -81,6 +79,9 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         }
     };
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
     private NavigationView.OnNavigationItemSelectedListener drawer_listener = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -110,20 +111,21 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home_screen);
 
+        // Get token
+        Bundle bundle = getIntent().getExtras();
+        token = bundle.getString("token");
+        Log.d("DBG", "token: " + token);
+
+        // Toolbar stuff
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
-        // Get token
-        Bundle bundle = getIntent().getExtras();
-        token = bundle.getString("token");
-        Log.d("DBG", "token: " + token);
-
+        // Drawer stuff
         drawerLayout = findViewById(R.id.drawer_container);
         navigationView = findViewById(R.id.nav_view);
-
         navigationView.setNavigationItemSelectedListener(drawer_listener);
 
         AdminReportFragment adminReportFragment = new AdminReportFragment();

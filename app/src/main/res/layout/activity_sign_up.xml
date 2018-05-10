@@ -1,53 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.SignUpActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@drawable/login_background_vertical"
+              tools:context="com.example.osanseviero.proyectofinalmoviles.SignUpActivity">
 
-    <!--TODO: Change this to Material Design and change hints strings to variables -->
-    <EditText
-        android:id="@+id/signupUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/signUpUsername" />
 
-    <EditText
-        android:id="@+id/signupName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Nombre" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:background="@drawable/buble"
+            android:paddingRight="10dp" android:paddingLeft="10dp" android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
 
-    <EditText
-        android:id="@+id/signupEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="Email"
-        />
+        <!--TODO: Change this to Material Design and change hints strings to variables -->
+        <EditText
+                android:textColor="@android:color/background_light"
+                android:textColorLink="@android:color/holo_green_dark"
+                android:textColorHint="@color/white_transparent"
+            android:id="@+id/signupUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/signUpUsername" />
 
-    <EditText
-        android:id="@+id/signupPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Contraseña" />
+        <EditText
+                android:textColor="@android:color/background_light"
+                android:textColorLink="@android:color/holo_green_dark"
+                android:textColorHint="@color/white_transparent"
+            android:id="@+id/signupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Nombre" />
 
-    <Button
-        android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="signupcheck"
-        android:text="@string/signup"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        <EditText
+                android:textColor="@android:color/background_light"
+                android:textColorLink="@android:color/holo_green_dark"
+                android:textColorHint="@color/white_transparent"
+            android:id="@+id/signupEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="Email"
+            />
 
-</LinearLayout>
+        <EditText
+                android:textColor="@android:color/background_light"
+                android:textColorLink="@android:color/holo_green_dark"
+                android:textColorHint="@color/white_transparent"
+            android:id="@+id/signupPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Contraseña" />
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="signupcheck"
+            android:text="@string/signup"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
+
+</RelativeLayout>
