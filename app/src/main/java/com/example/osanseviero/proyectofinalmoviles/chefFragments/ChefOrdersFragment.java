@@ -2,6 +2,8 @@ package com.example.osanseviero.proyectofinalmoviles.chefFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +72,7 @@ public class ChefOrdersFragment extends Fragment {
                                     public void onClick(View v) {
 
 
-                                        Toast.makeText(getActivity().getApplicationContext(), "Orden despachada", Toast.LENGTH_SHORT).show();
+
                                         JSONObject jsDel = new JSONObject();
                                         try {
                                             jsDel.put("token", ((ChefHomeScreenActivity) rootView.getContext()).token );
@@ -90,6 +92,13 @@ public class ChefOrdersFragment extends Fragment {
                                                         try {
                                                             String message = response.getString("message");
                                                             Log.d("DBG", "Message: " + message);
+                                                            Toast.makeText(getActivity().getApplicationContext(), "Orden despachada", Toast.LENGTH_SHORT).show();
+
+                                                            ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
+                                                            FragmentManager cofm = getFragmentManager();
+                                                            FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
+                                                            reportFragmentTransaction.replace(R.id.contentChefFragment, chefOrdersFragment);
+                                                            reportFragmentTransaction.commit();
                                                         } catch (JSONException e) {
                                                             e.printStackTrace();
                                                         }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,10 +84,23 @@ public class WaiterTableOrders extends Fragment {
                                     public void onClick(View v) {
 
 
-                                        Toast.makeText(getActivity().getApplicationContext(), "Orden despachada", Toast.LENGTH_SHORT).show();
+
                                         JSONObject jsDel = new JSONObject();
                                         try {
                                             jsDel.put("token", ((WaiterHomeScreenActivity) rootView.getContext()).token );
+
+                                            Toast.makeText(getActivity().getApplicationContext(), "Orden despachada", Toast.LENGTH_SHORT).show();
+
+                                            WaiterTableOrders waiterTableOrders = new WaiterTableOrders();
+                                            FragmentManager wto = getFragmentManager();
+                                            FragmentTransaction reportFragmentTransaction = wto.beginTransaction();
+                                            reportFragmentTransaction.replace(R.id.contentWaiterFragment, waiterTableOrders);
+
+                                            Bundle args = new Bundle();
+                                            args.putInt("table", table);
+                                            waiterTableOrders.setArguments(args);
+                                            reportFragmentTransaction.commit();
+
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
