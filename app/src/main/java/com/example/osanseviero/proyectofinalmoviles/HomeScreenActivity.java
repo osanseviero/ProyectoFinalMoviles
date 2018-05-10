@@ -72,6 +72,8 @@ public class HomeScreenActivity extends AppCompatActivity {
                                 Log.d("DBG", "token: " + token);
                                 Log.d("DBG", "kind: " + kind);
 
+                                Resources.setToken(token);
+
                                 Toast.makeText(getApplicationContext(), "Bienvenido de nuevo", Toast.LENGTH_SHORT).show();
 
                                 //TODO: Check kind and send to corresponding screen

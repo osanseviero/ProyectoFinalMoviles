@@ -79,28 +79,30 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 String kind = response.getString("kind");
 
-                                Log.d("DBG", "token: " + token);
-                                Log.d("DBG", "kind: " + kind);
+                                Log.d("DBG-validate", "token!!: " + token);
+                                Log.d("DBG-validate", "kind: " + kind);
+
+                                Resources.setToken(token);
 
                                 Toast.makeText(getApplicationContext(), "Bienvenido de nuevo", Toast.LENGTH_SHORT).show();
 
                                 //TODO: Check kind and send to corresponding screen
                                 if(kind.equals("1")) {
                                     adminIntent.putExtra("token", token);
-                                    Log.i("NAV", "Abriendo home screen del admin.");
+                                    Log.i("NAV", "Abriendo home screen del admin.-");
                                     startActivity(adminIntent);
                                 } else if(kind.equals("3")) {
                                     chefIntent.putExtra("token", token);
-                                    Log.i("NAV", "Abriendo home screen del chef.");
+                                    Log.i("NAV", "Abriendo home screen del chef.-");
                                     startActivity(chefIntent);
                                 } else if(kind.equals("4")) {
                                     waiterIntent.putExtra("token", token);
-                                    Log.i("NAV", "Abriendo home screen del mesero.");
+                                    Log.i("NAV", "Abriendo home screen del mesero.-");
                                     startActivity(waiterIntent);
                                 }
                                 else if(kind.equals("5")) {
                                     clientIntent.putExtra("token", token);
-                                    Log.i("NAV", "Abriendo home screen del cliente.");
+                                    Log.i("NAV", "Abriendo home screen del cliente.-");
                                     startActivity(clientIntent);
                                 }
                             } catch (JSONException e) {
@@ -167,8 +169,10 @@ public class LoginActivity extends AppCompatActivity {
                             String token = response.getString("token");
                             String kind = response.getString("kind");
 
-                            Log.d("DBG", "token: " + token);
-                            Log.d("DBG", "kind: " + kind);
+                            Log.d("DBG-login", "token: " + token);
+                            Log.d("DBG-login", "kind: " + kind);
+
+                            Resources.setToken(token);
 
                             Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
 
