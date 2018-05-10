@@ -156,6 +156,61 @@ public class SignUpActivity extends AppCompatActivity {
     public void createUser(View v) {
         final Intent intent = new Intent(this, ClientHomeScreenActivity.class);
 
+        //JSON request for login
+        JSONObject js2 = new JSONObject();
+        try {
+            // Build JSON from text fields
+            js2.put("username", username.getText().toString());
+            js2.put("password", password.getText().toString());
+            Log.d("DBG", js2.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url2 = "http://docker-azure.cloudapp.net/user/login";
+        JsonObjectRequest loginRequest = new JsonObjectRequest(
+                Request.Method.POST, url2, js2,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String token = response.getString("token");
+                            String kind = response.getString("kind");
+
+                            adaptor.open();
+                            adaptor.insertToken(token);
+                            adaptor.close();
+
+                            Log.d("DBG", "token: " + token);
+                            Log.d("DBG", "kind: " + kind);
+
+                            Resources.setToken(token);
+
+                            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
+
+                            //TODO: Check kind and send to corresponding screen
+
+                            intent.putExtra("token", token);
+                            Log.i("NAV", "Abriendo home screen del cliente.");
+                            startActivity(intent);
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //TODO: Handle error
+
+                Toast.makeText(getApplicationContext(), new String(error.networkResponse.data), Toast.LENGTH_SHORT).show();
+                Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                Log.e("err", "Message:" + new String(error.networkResponse.data));
+            }
+        });
+
         JSONObject js = new JSONObject();
         try {
             // Build JSON from text fields
@@ -191,11 +246,11 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d("DBG", "User id: " + id);
 
                             //TODO: Show a success message
-                            Toast.makeText(getApplicationContext(), "Usuario creado exitosamente", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Usuario creado exitosamente", Toast.LENGTH_SHORT).show();
+                            Volley.newRequestQueue(SignUpActivity.this).add(loginRequest);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
 
@@ -210,61 +265,5 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         Volley.newRequestQueue(this).add(jsonObjReq);
-
-        //JSON request for login
-        JSONObject js2 = new JSONObject();
-        try {
-            // Build JSON from text fields
-            js2.put("username", username.getText().toString());
-            js2.put("password", password.getText().toString());
-            Log.d("DBG", js2.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        String url2 = "http://docker-azure.cloudapp.net/user/login";
-        JsonObjectRequest jsonObjReq2 = new JsonObjectRequest(
-                Request.Method.POST, url2, js2,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String token = response.getString("token");
-                            String kind = response.getString("kind");
-
-                            adaptor.open();
-                            adaptor.insertToken(token);
-                            adaptor.close();
-
-                            Log.d("DBG", "token: " + token);
-                            Log.d("DBG", "kind: " + kind);
-
-                            Toast.makeText(getApplicationContext(), "Login Exitoso", Toast.LENGTH_SHORT).show();
-
-                            //TODO: Check kind and send to corresponding screen
-
-                            intent.putExtra("token", token);
-                            Log.i("NAV", "Abriendo home screen del cliente.");
-                            startActivity(intent);
-                        }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //TODO: Handle error
-
-                Toast.makeText(getApplicationContext(), new String(error.networkResponse.data), Toast.LENGTH_SHORT).show();
-                Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
-                Log.e("err", "Message:" + new String(error.networkResponse.data));
-            }
-        });
-
-
-        Volley.newRequestQueue(this).add(jsonObjReq2);
     }
 }
