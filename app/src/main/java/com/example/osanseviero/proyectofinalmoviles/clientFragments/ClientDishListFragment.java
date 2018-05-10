@@ -1,4 +1,4 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.clientFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,10 +17,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
+import com.example.osanseviero.proyectofinalmoviles.MyJsonArrayRequest;
+import com.example.osanseviero.proyectofinalmoviles.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 
 public class ClientDishListFragment extends Fragment {

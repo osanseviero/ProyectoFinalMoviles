@@ -1,7 +1,5 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.adminFragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import com.example.osanseviero.proyectofinalmoviles.Graphs.Graph;
+import com.example.osanseviero.proyectofinalmoviles.graphs.Graph;
+import com.example.osanseviero.proyectofinalmoviles.R;
 import com.github.mikephil.charting.charts.PieChart;
 
 
@@ -50,7 +49,9 @@ public class AdminReportFragment extends Fragment {
 
 
     private void update(int days){
-        Graph.loadPieData(pieChart1, "inventory/usage/" + String.valueOf(days), "Uso de las últimas 24 horas.", rootview.getContext());
-        Graph.loadPieData(pieChart2, "inventory/expense/" + String.valueOf(days), "Gasto de las últimas 24 horas.", rootview.getContext());
+        String days_str = String.valueOf(days);
+        String label = (days == 1)? "Último día.": "Últimos " + days_str + " días.";
+        Graph.loadPieData(pieChart1, "inventory/usage/" + days_str, label, rootview.getContext());
+        Graph.loadPieData(pieChart2, "inventory/expense/" + days_str, label, rootview.getContext());
     }
 }

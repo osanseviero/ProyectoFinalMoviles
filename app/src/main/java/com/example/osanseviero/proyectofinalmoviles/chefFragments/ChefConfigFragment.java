@@ -1,4 +1,4 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.chefFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.example.osanseviero.proyectofinalmoviles.*;
 
 
 public class ChefConfigFragment extends Fragment {

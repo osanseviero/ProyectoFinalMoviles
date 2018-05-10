@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.osanseviero.proyectofinalmoviles.adminFragments.AdminHomeScreenActivity;
+import com.example.osanseviero.proyectofinalmoviles.chefFragments.ChefHomeScreenActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +45,7 @@ public class MaterialCreationFragment extends Fragment {
                     js.put("img_url", image.getText().toString());
                     js.put("units", units.getText().toString());
                     js.put("calories", Integer.parseInt(calories.getText().toString()));
-                    js.put("units", description.getText().toString());
+                    js.put("desc", description.getText().toString());
                     try {
                         js.put("token", ((AdminHomeScreenActivity) v.getContext()).token );
                     } catch(ClassCastException e) {
@@ -69,7 +72,7 @@ public class MaterialCreationFragment extends Fragment {
                                     String id = response.getString("id");
                                     Log.d("DBG", "Message: " + message);
                                     Log.d("DBG", "Material id: " + id);
-
+                                    Toast.makeText(rootView.getContext(), "Created!", Toast.LENGTH_SHORT).show();
                                     //TODO: Show a success message
                                 } catch (JSONException e) {
                                     e.printStackTrace();

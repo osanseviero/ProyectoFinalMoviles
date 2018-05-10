@@ -1,4 +1,4 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.chefFragments;
 
 
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
+import com.example.osanseviero.proyectofinalmoviles.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 

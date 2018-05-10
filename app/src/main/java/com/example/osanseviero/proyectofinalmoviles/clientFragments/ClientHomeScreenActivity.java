@@ -1,4 +1,4 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.clientFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,9 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.osanseviero.proyectofinalmoviles.DBAdaptor;
+import com.example.osanseviero.proyectofinalmoviles.HomeScreenActivity;
+import com.example.osanseviero.proyectofinalmoviles.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -1,11 +1,11 @@
-package com.example.osanseviero.proyectofinalmoviles.Graphs;
+package com.example.osanseviero.proyectofinalmoviles.graphs;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.osanseviero.proyectofinalmoviles.R;
-import com.example.osanseviero.proyectofinalmoviles.Requests.RequestHelper;
+import com.example.osanseviero.proyectofinalmoviles.requests.RequestHelper;
 import com.example.osanseviero.proyectofinalmoviles.Resources;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;

@@ -18,4 +18,8 @@
     <string name="title_activity_admin_home_screen">AdminHomeScreenActivity</string>
     <string name="title_activity_chef_config">ChefConfigActivity</string>
     <string name="spinner_title">Tipo de Usuario</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="logout">Logout</string>
 </resources>

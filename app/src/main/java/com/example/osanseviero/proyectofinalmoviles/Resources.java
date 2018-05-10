@@ -12,4 +12,6 @@ public class Resources {
     public synchronized static void setToken(String new_token){
         token = new_token;
     }
+
+    public static String[] drawer = {"Logout"};
 }

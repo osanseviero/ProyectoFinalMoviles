@@ -1,17 +1,21 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.adminFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -23,14 +27,24 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.osanseviero.proyectofinalmoviles.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class WaiterHomeScreenActivity extends AppCompatActivity {
+public class AdminHomeScreenActivity extends AppCompatActivity {
+    EditText username;
+    EditText name;
+    EditText email;
+    EditText password;
+    EditText kind;
+    public String token;
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
     final DBAdaptor adaptor = new DBAdaptor(this);
-    String token;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -39,14 +53,41 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Log.i("NAV", "Navigating to home.");
-                    WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
-                    FragmentManager wtfm = getSupportFragmentManager();
-                    FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
-                    waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
-                    waiterTablesTransaction.commit();
+                    getSupportActionBar().setTitle("Reportes");
+                    AdminReportFragment adminReportFragment = new AdminReportFragment();
+                    FragmentManager rfm = getSupportFragmentManager();
+                    FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
+                    reportFragmentTransaction.replace(R.id.contentAdminFragment, adminReportFragment);
+                    reportFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
+                    getSupportActionBar().setTitle("Usuarios");
+                    AdminUsersFragment userManagementFragment = new AdminUsersFragment();
+                    FragmentManager aufm = getSupportFragmentManager();
+                    FragmentTransaction userCreationFragmentTransaction = aufm.beginTransaction();
+                    userCreationFragmentTransaction.replace(R.id.contentAdminFragment, userManagementFragment);
+                    userCreationFragmentTransaction.commit();
+                    return true;
+                case R.id.navigation_notifications:
+                    getSupportActionBar().setTitle("Restaurante");
+                    AdminRestaurantManagementFragment restaurantManagementFragment = new AdminRestaurantManagementFragment();
+                    FragmentManager armfm = getSupportFragmentManager();
+                    FragmentTransaction restaurantManagementTransaction = armfm.beginTransaction();
+                    restaurantManagementTransaction.replace(R.id.contentAdminFragment, restaurantManagementFragment);
+                    restaurantManagementTransaction.commit();
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    private NavigationView.OnNavigationItemSelectedListener drawer_listener = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.nav_logout:
+                    logout(null);
+                    drawerLayout.closeDrawers();
                     return true;
             }
             return false;
@@ -54,22 +95,44 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
     };
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waiter_home_screen);
+        setContentView(R.layout.activity_admin_home_screen);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         // Get token
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
 
-        WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
-        FragmentManager wtfm = getSupportFragmentManager();
-        FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
-        waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
-        waiterTablesTransaction.commit();
+        drawerLayout = findViewById(R.id.drawer_container);
+        navigationView = findViewById(R.id.nav_view);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationWaiter);
+        navigationView.setNavigationItemSelectedListener(drawer_listener);
+
+        AdminReportFragment adminReportFragment = new AdminReportFragment();
+        FragmentManager rfm = getSupportFragmentManager();
+        FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
+        reportFragmentTransaction.replace(R.id.contentAdminFragment, adminReportFragment);
+        reportFragmentTransaction.commit();
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationAdmin);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
@@ -94,7 +157,7 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         Log.d("DBG", "Abriendo home screen.");
-                        Intent intent = new Intent(WaiterHomeScreenActivity.this , HomeScreenActivity.class);
+                        Intent intent = new Intent(AdminHomeScreenActivity.this , HomeScreenActivity.class);
 
                         adaptor.open();
                         adaptor.dropDatabase();
@@ -143,5 +206,4 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(request);
     }
-
 }

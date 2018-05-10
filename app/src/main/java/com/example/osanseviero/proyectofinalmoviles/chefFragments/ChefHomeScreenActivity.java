@@ -1,16 +1,12 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.chefFragments;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,70 +19,33 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.osanseviero.proyectofinalmoviles.DBAdaptor;
+import com.example.osanseviero.proyectofinalmoviles.HomeScreenActivity;
+import com.example.osanseviero.proyectofinalmoviles.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class AdminHomeScreenActivity extends AppCompatActivity {
-    EditText username;
-    EditText name;
-    EditText email;
-    EditText password;
-    EditText kind;
-    String token;
+public class ChefHomeScreenActivity extends AppCompatActivity {
+    public String token;
     final DBAdaptor adaptor = new DBAdaptor(this);
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    AdminReportFragment adminReportFragment = new AdminReportFragment();
-                    FragmentManager rfm = getSupportFragmentManager();
-                    FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
-                    reportFragmentTransaction.replace(R.id.contentAdminFragment, adminReportFragment);
-                    reportFragmentTransaction.commit();
-                    return true;
-                case R.id.navigation_dashboard:
-                    AdminUsersFragment userManagementFragment = new AdminUsersFragment();
-                    FragmentManager aufm = getSupportFragmentManager();
-                    FragmentTransaction userCreationFragmentTransaction = aufm.beginTransaction();
-                    userCreationFragmentTransaction.replace(R.id.contentAdminFragment, userManagementFragment);
-                    userCreationFragmentTransaction.commit();
-                    return true;
-                case R.id.navigation_notifications:
-                    AdminRestaurantManagementFragment restaurantManagementFragment = new AdminRestaurantManagementFragment();
-                    FragmentManager armfm = getSupportFragmentManager();
-                    FragmentTransaction restaurantManagementTransaction = armfm.beginTransaction();
-                    restaurantManagementTransaction.replace(R.id.contentAdminFragment, restaurantManagementFragment);
-                    restaurantManagementTransaction.commit();
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_home_screen);
+        setContentView(R.layout.activity_chef_home_screen);
 
         // Get token
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
 
-        AdminReportFragment adminReportFragment = new AdminReportFragment();
-        FragmentManager rfm = getSupportFragmentManager();
-        FragmentTransaction reportFragmentTransaction = rfm.beginTransaction();
-        reportFragmentTransaction.replace(R.id.contentAdminFragment, adminReportFragment);
+        ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
+        FragmentManager cofm = getSupportFragmentManager();
+        FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
+        reportFragmentTransaction.replace(R.id.contentChefFragment, chefOrdersFragment);
         reportFragmentTransaction.commit();
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationAdmin);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     public void logout(View v)
@@ -110,7 +69,7 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         Log.d("DBG", "Abriendo home screen.");
-                        Intent intent = new Intent(AdminHomeScreenActivity.this , HomeScreenActivity.class);
+                        Intent intent = new Intent(ChefHomeScreenActivity.this , HomeScreenActivity.class);
 
                         adaptor.open();
                         adaptor.dropDatabase();
@@ -158,5 +117,23 @@ public class AdminHomeScreenActivity extends AppCompatActivity {
         };
 
         Volley.newRequestQueue(this).add(request);
+    }
+
+
+
+    public void chefConfig(View v) {
+        ChefConfigFragment chefConfigFragment = new ChefConfigFragment();
+        FragmentManager ccfm = getSupportFragmentManager();
+        FragmentTransaction reportFragmentTransaction = ccfm.beginTransaction();
+        reportFragmentTransaction.replace(R.id.contentChefFragment, chefConfigFragment);
+        reportFragmentTransaction.commit();
+    }
+
+    public void chefHome(View v) {
+        ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
+        FragmentManager cofm = getSupportFragmentManager();
+        FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
+        reportFragmentTransaction.replace(R.id.contentChefFragment, chefOrdersFragment);
+        reportFragmentTransaction.commit();
     }
 }

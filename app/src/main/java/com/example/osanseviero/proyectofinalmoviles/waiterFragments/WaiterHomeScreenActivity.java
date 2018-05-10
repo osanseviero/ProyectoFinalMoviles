@@ -1,15 +1,15 @@
-package com.example.osanseviero.proyectofinalmoviles;
+package com.example.osanseviero.proyectofinalmoviles.waiterFragments;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -19,37 +19,60 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
+import com.example.osanseviero.proyectofinalmoviles.DBAdaptor;
+import com.example.osanseviero.proyectofinalmoviles.HomeScreenActivity;
+import com.example.osanseviero.proyectofinalmoviles.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
-public class ChefHomeScreenActivity extends AppCompatActivity {
-    String token;
+public class WaiterHomeScreenActivity extends AppCompatActivity {
     final DBAdaptor adaptor = new DBAdaptor(this);
+    String token;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Log.i("NAV", "Navigating to home.");
+                    WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
+                    FragmentManager wtfm = getSupportFragmentManager();
+                    FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
+                    waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
+                    waiterTablesTransaction.commit();
+                    return true;
+                case R.id.navigation_dashboard:
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_home_screen);
+        setContentView(R.layout.activity_waiter_home_screen);
 
         // Get token
         Bundle bundle = getIntent().getExtras();
         token = bundle.getString("token");
         Log.d("DBG", "token: " + token);
 
-        ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
-        FragmentManager cofm = getSupportFragmentManager();
-        FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
-        reportFragmentTransaction.replace(R.id.contentChefFragment, chefOrdersFragment);
-        reportFragmentTransaction.commit();
+        WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
+        FragmentManager wtfm = getSupportFragmentManager();
+        FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
+        waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
+        waiterTablesTransaction.commit();
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationWaiter);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     public void logout(View v)
@@ -73,7 +96,7 @@ public class ChefHomeScreenActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         Log.d("DBG", "Abriendo home screen.");
-                        Intent intent = new Intent(ChefHomeScreenActivity.this , HomeScreenActivity.class);
+                        Intent intent = new Intent(WaiterHomeScreenActivity.this , HomeScreenActivity.class);
 
                         adaptor.open();
                         adaptor.dropDatabase();
@@ -123,21 +146,4 @@ public class ChefHomeScreenActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-
-
-    public void chefConfig(View v) {
-        ChefConfigFragment chefConfigFragment = new ChefConfigFragment();
-        FragmentManager ccfm = getSupportFragmentManager();
-        FragmentTransaction reportFragmentTransaction = ccfm.beginTransaction();
-        reportFragmentTransaction.replace(R.id.contentChefFragment, chefConfigFragment);
-        reportFragmentTransaction.commit();
-    }
-
-    public void chefHome(View v) {
-        ChefOrdersFragment chefOrdersFragment = new ChefOrdersFragment();
-        FragmentManager cofm = getSupportFragmentManager();
-        FragmentTransaction reportFragmentTransaction = cofm.beginTransaction();
-        reportFragmentTransaction.replace(R.id.contentChefFragment, chefOrdersFragment);
-        reportFragmentTransaction.commit();
-    }
 }
