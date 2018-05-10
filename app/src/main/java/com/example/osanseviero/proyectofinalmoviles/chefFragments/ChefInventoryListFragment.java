@@ -23,17 +23,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class ChefInventoryListFragment extends Fragment {
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
-
         final View rootView = inflater.inflate(R.layout.fragment_chef_inventory_list, container, false);
 
 
@@ -76,7 +71,7 @@ public class ChefInventoryListFragment extends Fragment {
                                     public void onClick(View v) {
 
 
-                                        Toast.makeText(getActivity().getApplicationContext(), "Oops", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity().getApplicationContext(), "Material Eliminado", Toast.LENGTH_SHORT).show();
                                         JSONObject jsDel = new JSONObject();
                                         try {
                                             jsDel.put("token", ((ChefHomeScreenActivity) rootView.getContext()).token );
