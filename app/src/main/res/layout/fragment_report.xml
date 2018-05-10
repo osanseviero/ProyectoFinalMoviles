@@ -44,6 +44,23 @@
                         android:layout_height="400dp"
                         android:id="@+id/pieChart2">
                 </com.github.mikephil.charting.charts.PieChart>
+                <TextView
+                        android:text="Ingresos $ por mesa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/textView3"/>
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:id="@+id/barChart1"/>
+                <TextView
+                        android:text="Ingresos $ por mesero"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/textView4"/>
+                <com.github.mikephil.charting.charts.PieChart
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:id="@+id/pieChart3">
+                </com.github.mikephil.charting.charts.PieChart>
             </LinearLayout>
         </ScrollView>
 

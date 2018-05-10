@@ -9,6 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import com.example.osanseviero.proyectofinalmoviles.graphs.Graph;
 import com.example.osanseviero.proyectofinalmoviles.R;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 
 
@@ -16,6 +17,8 @@ public class AdminReportFragment extends Fragment {
     View rootview;
     PieChart pieChart1;
     PieChart pieChart2;
+    PieChart pieChart3;
+    HorizontalBarChart barChart;
     SeekBar seekBar1;
     TextView daysView;
 
@@ -27,6 +30,10 @@ public class AdminReportFragment extends Fragment {
 
         pieChart1 = rootview.findViewById(R.id.pieChart1);
         pieChart2 = rootview.findViewById(R.id.pieChart2);
+        pieChart3 = rootview.findViewById(R.id.pieChart3);
+
+        barChart = rootview.findViewById(R.id.barChart1);
+
         seekBar1 = rootview.findViewById(R.id.seekBar);
         daysView = rootview.findViewById(R.id.daysView);
 
@@ -53,5 +60,7 @@ public class AdminReportFragment extends Fragment {
         String label = (days == 1)? "Último día.": "Últimos " + days_str + " días.";
         Graph.loadPieData(pieChart1, "inventory/usage/" + days_str, label, rootview.getContext());
         Graph.loadPieData(pieChart2, "inventory/expense/" + days_str, label, rootview.getContext());
+        Graph.loadBarData(barChart, "tables/" + days_str, label, rootview.getContext());
+        Graph.loadPieData(pieChart3, "waiter-tabs/" + days_str, label, rootview.getContext());
     }
 }

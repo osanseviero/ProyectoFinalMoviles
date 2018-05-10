@@ -7,10 +7,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.osanseviero.proyectofinalmoviles.R;
 import com.example.osanseviero.proyectofinalmoviles.requests.RequestHelper;
 import com.example.osanseviero.proyectofinalmoviles.Resources;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.data.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +51,42 @@ public class Graph {
                 Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
                 Log.e("PIECHART", new String(error.networkResponse.data));
             }
+        );
+        Volley.newRequestQueue(context).add(req);
+    }
+
+    public static void loadBarData(final BarChart barChart, String report, String label, Context context){
+        String path = Resources.rootEndpoint + "/reports/" + report;
+        JSONObject jsonObject = RequestHelper.makeJsonToken();
+        Log.d("DBG", "loadPieData: json: " + jsonObject.toString());
+        JsonObjectRequest req = RequestHelper.makeJsonPOST(path, jsonObject,
+                (response)->{
+                    try{
+                        List<BarEntry> entries = new ArrayList<>();
+                        JSONArray array = response.getJSONArray("data");
+                        for(int i = 0; i < array.length(); i++){
+                            entries.add( new BarEntry(
+                                    (float)array.getJSONObject(i).getDouble("X"),
+                                    (float)array.getJSONObject(i).getDouble("Y")
+                            ));
+                            Log.v("!-!-!-!-!-!-!-!-!", array.getJSONObject(i).toString());
+                            Log.v("!-!-!-!-!-!-!-!-!", "Adding: " + array.getJSONObject(i).getDouble("X") + " -> " + array.getJSONObject(i).getDouble("Y"));
+                        }
+                        BarDataSet set = new BarDataSet(entries, label);
+                        BarData data = new BarData(set);
+                        barChart.setData(data);
+                        barChart.setFitBars(true);
+                        barChart.invalidate();
+                    }
+                    catch (JSONException ex){
+                        Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
+                        ex.printStackTrace();
+                    }
+                },
+                (error)->{
+                    Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
+                    Log.e("PIECHART", new String(error.networkResponse.data));
+                }
         );
         Volley.newRequestQueue(context).add(req);
     }

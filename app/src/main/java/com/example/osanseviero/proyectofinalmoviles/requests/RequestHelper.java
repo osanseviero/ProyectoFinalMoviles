@@ -9,9 +9,7 @@ import org.json.JSONObject;
 
 public class RequestHelper {
     public static JSONObject makeJsonToken(){
-        Log.v("MAKING JSON", "-> called!");
         try {
-            Log.v("MAKING JSON", Resources.getToken());
             return new JSONObject().put("token", Resources.getToken());
         }
         catch(JSONException ex){
