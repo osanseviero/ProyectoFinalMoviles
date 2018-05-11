@@ -2,31 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.osanseviero.proyectofinalmoviles.clientFragments.ClientOrderFragment">
+    tools:context="com.example.osanseviero.proyectofinalmoviles.chefFragments.ChefOrdersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:text="Lista de platillos ordenados"
+        android:textSize="28sp"/>
 
-        <TextView
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp">
+        <LinearLayout
+            android:id="@+id/CustomerList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Mostrar platillos seleccionados" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="200dp"
-            android:layout_marginEnd="110dp"
-            android:layout_marginRight="110dp"
-            android:text="Ordenar" />
-
-    </RelativeLayout>
-
+            android:orientation="vertical"
+            android:paddingTop="40sp"
+            >
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
