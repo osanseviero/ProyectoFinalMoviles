@@ -56,7 +56,7 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
                     categoryListTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    getSupportActionBar().setTitle("Ordenar");
+                    getSupportActionBar().setTitle("Ordenes");
                     Log.i("NAV", "Navigating to dishes selected to order.");
                     ClientOrderFragment clientOrderFragment = new ClientOrderFragment();
                     FragmentManager ofm = getSupportFragmentManager();
@@ -65,7 +65,7 @@ public class ClientHomeScreenActivity extends AppCompatActivity {
                     orderTransaction.commit();
                     return true;
                 case R.id.navigation_notifications:
-                    getSupportActionBar().setTitle("Ordenes");
+                    getSupportActionBar().setTitle("Reporte");
                     Log.i("NAV", "Navigating to list of orders.");
                     ClientOrderListFragment clientOrderListFragment = new ClientOrderListFragment();
                     FragmentManager olfm = getSupportFragmentManager();
