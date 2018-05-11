@@ -10,12 +10,6 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/createTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Crear Mesa" />
-
-        <Button
             android:id="@+id/createDish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
