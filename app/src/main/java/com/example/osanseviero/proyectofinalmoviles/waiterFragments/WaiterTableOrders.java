@@ -140,9 +140,9 @@ public class WaiterTableOrders extends Fragment {
                                         Volley.newRequestQueue(rootView.getContext()).add(delete);
                                     }
                                 });
-
-                                linearLayout.addView(nameView);
-                                linearLayout.addView(b);
+                                Log.d("DBG", Integer.toString(linearLayout.indexOfChild(closetab)));
+                                linearLayout.addView(nameView, linearLayout.indexOfChild(closetab) );
+                                linearLayout.addView(b, linearLayout.indexOfChild(closetab));
                             } catch(JSONException e) {
                                 e.printStackTrace();
                             }
