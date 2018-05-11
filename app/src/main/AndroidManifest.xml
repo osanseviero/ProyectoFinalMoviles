@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <!--android:theme="@style/AppTheme"-->
+
+        <!-- android:theme="@style/AppTheme" -->
         <activity android:name=".ImageSplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,19 +23,20 @@
         <activity
             android:name=".HomeScreenActivity"
             android:exported="true" />
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
             android:name=".clientFragments.ClientHomeScreenActivity"
-            android:label="@string/title_activity_client_home_scren"/>
+            android:label="@string/title_activity_client_home_scren" />
         <activity
             android:name=".waiterFragments.WaiterHomeScreenActivity"
             android:label="@string/title_activity_waiter_home_screen" />
         <activity
             android:name=".adminFragments.AdminHomeScreenActivity"
-            android:label="@string/title_activity_admin_home_screen"/>
+            android:label="@string/title_activity_admin_home_screen" />
         <activity android:name=".chefFragments.ChefHomeScreenActivity" />
-        <activity android:name=".VideoSplashActivity"/>
+        <activity android:name=".VideoSplashActivity" />
+        <activity android:name=".ownerFragments.OwnerHomeScreenActivity"></activity>
     </application>
 
 </manifest>

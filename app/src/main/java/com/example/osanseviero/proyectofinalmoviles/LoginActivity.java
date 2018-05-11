@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.osanseviero.proyectofinalmoviles.adminFragments.AdminHomeScreenActivity;
 import com.example.osanseviero.proyectofinalmoviles.chefFragments.ChefHomeScreenActivity;
 import com.example.osanseviero.proyectofinalmoviles.clientFragments.ClientHomeScreenActivity;
+import com.example.osanseviero.proyectofinalmoviles.ownerFragments.OwnerHomeScreenActivity;
 import com.example.osanseviero.proyectofinalmoviles.waiterFragments.WaiterHomeScreenActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
         final Intent waiterIntent = new Intent(this, WaiterHomeScreenActivity.class);
         final Intent chefIntent = new Intent(this, ChefHomeScreenActivity.class);
+        final Intent ownerIntent = new Intent(this, OwnerHomeScreenActivity.class);
 
         Log.d("DBG","creating adaptor");
 
@@ -95,6 +97,10 @@ public class LoginActivity extends AppCompatActivity {
                                     adminIntent.putExtra("token", token);
                                     Log.i("NAV", "Abriendo home screen del admin.-");
                                     startActivity(adminIntent);
+                                } else if(kind.equals("2")) {
+                                    ownerIntent.putExtra("token", token);
+                                    Log.i("NAV", "Abriendo home screen del dueño.-");
+                                    startActivity(ownerIntent);
                                 } else if(kind.equals("3")) {
                                     chefIntent.putExtra("token", token);
                                     Log.i("NAV", "Abriendo home screen del chef.-");
@@ -152,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
         final Intent adminIntent = new Intent(this, AdminHomeScreenActivity.class);
         final Intent waiterIntent = new Intent(this, WaiterHomeScreenActivity.class);
         final Intent chefIntent = new Intent(this, ChefHomeScreenActivity.class);
+        final Intent ownerIntent = new Intent(this, OwnerHomeScreenActivity.class);
         final  DBAdaptor adaptor = new DBAdaptor(this);
         JSONObject js = new JSONObject();
         try {
@@ -189,6 +196,10 @@ public class LoginActivity extends AppCompatActivity {
                                 adminIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del admin.");
                                 startActivity(adminIntent);
+                            } else if(kind.equals("2")) {
+                                ownerIntent.putExtra("token", token);
+                                Log.i("NAV", "Abriendo home screen del dueño.-");
+                                startActivity(ownerIntent);
                             } else if(kind.equals("3")) {
                                 chefIntent.putExtra("token", token);
                                 Log.i("NAV", "Abriendo home screen del chef.");
