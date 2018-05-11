@@ -54,6 +54,12 @@ public class WaiterHomeScreenActivity extends AppCompatActivity {
                     waiterTablesTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
+                    Log.i("NAV", "Navigating to home.");
+                    WaiterOrderList waiterOrderList = new WaiterOrderList();
+                    FragmentManager wol = getSupportFragmentManager();
+                    FragmentTransaction waiterOrdersTransaction = wol.beginTransaction();
+                    waiterOrdersTransaction.replace(R.id.contentWaiterFragment, waiterOrderList);
+                    waiterOrdersTransaction.commit();
                     return true;
             }
             return false;
