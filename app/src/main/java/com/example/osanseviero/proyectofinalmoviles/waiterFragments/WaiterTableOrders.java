@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.osanseviero.proyectofinalmoviles.MyJsonArrayRequest;
 import com.example.osanseviero.proyectofinalmoviles.R;
 import com.example.osanseviero.proyectofinalmoviles.chefFragments.ChefHomeScreenActivity;
+import com.example.osanseviero.proyectofinalmoviles.clientFragments.ClientHomeScreenActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,12 +32,17 @@ import org.json.JSONObject;
 
 public class WaiterTableOrders extends Fragment {
     Integer table;
+    Button closetab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_waiter_table_orders, container, false);
+
+        closetab = rootView.findViewById(R.id.closeTab);
 
         String urlQuery = "http://docker-azure.cloudapp.net/tab/orders";
 
@@ -153,6 +159,88 @@ public class WaiterTableOrders extends Fragment {
         );
 
         Volley.newRequestQueue(rootView.getContext()).add(request);
+
+        closetab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mytaburl = "http://docker-azure.cloudapp.net/tab/mytabs";
+
+                JSONObject js2 = new JSONObject();
+                try {
+                    js2.put("token", ((WaiterHomeScreenActivity) rootView.getContext()).token );
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                MyJsonArrayRequest tabRequest = new MyJsonArrayRequest(
+                        Request.Method.POST,
+                        mytaburl,
+                        js2,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    Log.d("DBG", "TAB DEL USER");
+                                    Log.d("DBG", response.toString());
+                                    JSONObject js2 = response.getJSONObject(0);
+                                    String tabId = js2.getString("id");
+                                    String total = js2.getString("total");
+
+                                    String mytaburl = "http://docker-azure.cloudapp.net/tab/" + tabId + "/close";
+
+                                    JSONObject jsOrder = new JSONObject();
+                                    try {
+                                        jsOrder.put("token", ((WaiterHomeScreenActivity) rootView.getContext()).token );
+                                        Log.d("DBG", js2.toString());
+
+                                        JsonObjectRequest tabRequest = new JsonObjectRequest(
+                                                Request.Method.POST,
+                                                mytaburl,
+                                                jsOrder,
+                                                new Response.Listener<JSONObject>() {
+                                                    @Override
+                                                    public void onResponse(JSONObject response) {
+                                                        Toast.makeText(getContext(), "Cuenta cerrada. Total a cobrar: $" + total, Toast.LENGTH_LONG).show();
+                                                        Log.d("DBG", response.toString());
+
+                                                        WaiterTablesFragment waiterTablesfragment = new WaiterTablesFragment();
+                                                        FragmentManager wtfm = getFragmentManager();
+                                                        FragmentTransaction waiterTablesTransaction = wtfm.beginTransaction();
+                                                        waiterTablesTransaction.replace(R.id.contentWaiterFragment, waiterTablesfragment);
+                                                        waiterTablesTransaction.commit();
+                                                    }
+                                                },
+                                                new Response.ErrorListener() {
+                                                    @Override
+                                                    public void onErrorResponse(VolleyError error) {
+                                                        Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                                                        Log.e("err", "Message:" + new String(error.networkResponse.data));
+                                                    }
+                                                }
+                                        );
+                                        Volley.newRequestQueue(rootView.getContext()).add(tabRequest);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                } catch( JSONException e) {
+                                    Toast.makeText(rootView.getContext(), "No hay cuentas abiertas!", Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("ERROR", "Error code: " + error.networkResponse.statusCode);
+                                Log.e("err", "Message:" + new String(error.networkResponse.data));
+                            }
+                        }
+                );
+                Volley.newRequestQueue(rootView.getContext()).add(tabRequest);
+            }
+        });
 
         return rootView;
     }
